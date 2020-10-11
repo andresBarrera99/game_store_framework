@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.sql.DataSource;
 
@@ -14,6 +17,8 @@ import co.com.gamestore.framework.util.PoolHelper;
 
 
 public class BaseRepository {	
+	
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public static final String DB_SOURCE_NAME = "GAME_STORE";
 	
@@ -177,9 +182,31 @@ public class BaseRepository {
 	}
 	
 	
-	
+	/**
+	 * Method to get like parameter from an object 
+	 * @param param
+	 * @return
+	 */
 	protected String getLikeParameter(Object param) {
 		return "" + '%' + param + '%';
+	}
+	/**
+	 * Method to get a string date with custom format;
+	 * @param dateToFormat
+	 * @return a string with custom format
+	 */
+	protected String getDateFormated(Date dateToFormat) {
+		return formatter.format(dateToFormat);
+	}
+	
+	/**
+	 * Method to get Date from a string with custom format
+	 * @param dateToFormat
+	 * @return
+	 * @throws ParseException
+	 */
+	protected Date getDateFormatedFromString(String dateToFormat) throws ParseException {
+		return formatter.parse(dateToFormat);
 	}
 	
 	/**

@@ -4,7 +4,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Objects;
 
 import co.com.gamestore.framework.business.BaseBusiness;
-import co.com.gamestore.framework.error.CustomErrorMessage;
+import co.com.gamestore.framework.error.CustomErrorException;
 import co.com.gamestore.framework.repository.BaseRepository;
 import co.com.gamestore.framework.util.Utils;
 
@@ -15,18 +15,18 @@ import co.com.gamestore.framework.util.Utils;
 @SuppressWarnings({"rawtypes", "unchecked" })
 public class BaseController<T extends BaseBusiness, B extends BaseRepository> {
 	private T business;
-	public BaseController() throws CustomErrorMessage {
+	public BaseController() throws CustomErrorException {
 		try {
 			configureMVC(
 				(Class)(((ParameterizedType) Objects.requireNonNull(this.getClass().getGenericSuperclass())).getActualTypeArguments()[0]),
 			    (Class)(((ParameterizedType) Objects.requireNonNull(this.getClass().getGenericSuperclass())).getActualTypeArguments()[1])
 			);
 		} catch (InstantiationException e) {
-			throw new CustomErrorMessage("Ha ocurrido un error instancionado las clases: "+ e.getMessage());
+			throw new CustomErrorException("Ha ocurrido un error instancionado las clases: "+ e.getMessage());
 		} catch (IllegalAccessException e) {
-			throw new CustomErrorMessage("Error al intentar crear una instancia de forma reflexiva: "+ e.getMessage());
+			throw new CustomErrorException("Error al intentar crear una instancia de forma reflexiva: "+ e.getMessage());
 		} catch (ClassNotFoundException e) {
-			throw new CustomErrorMessage("No se ha encontrado una clase mientras se realizaban las instancias de forma reflexiva: " + e.getMessage());
+			throw new CustomErrorException("No se ha encontrado una clase mientras se realizaban las instancias de forma reflexiva: " + e.getMessage());
 		}
 	}
 	/**
@@ -48,14 +48,12 @@ public class BaseController<T extends BaseBusiness, B extends BaseRepository> {
 			}			
 		}
 	}
+	
 	public T getBusiness() {
         return business;
     }
 	
 	public void setBusiness(T business) {
         this.business = business;
-        if (!Utils.isNull(this.business)) {
-			this.business.setController(this);
-		}
     }
 }
