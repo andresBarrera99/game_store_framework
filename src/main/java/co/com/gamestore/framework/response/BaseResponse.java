@@ -1,6 +1,7 @@
 package co.com.gamestore.framework.response;
 
 import java.io.Serializable;
+import java.util.List;
 /**
  * 
  * @author Jonathan.Barrera
@@ -15,6 +16,7 @@ public class BaseResponse implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private boolean success;
+	private List<?> list;
 	private String errorMessage;
 	
 	public BaseResponse() {
@@ -29,6 +31,16 @@ public class BaseResponse implements Serializable {
 		this.success = success;
 	}
 	
+	
+	
+	public List<?> getList() {
+		return list;
+	}
+
+	public void setList(List<?> list) {
+		this.list = list;
+	}
+
 	public String getErrorMessage() {
 		return errorMessage;
 	}
@@ -40,7 +52,7 @@ public class BaseResponse implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BaseResponse [success=" + success + ", errorMessage=" + errorMessage + "]";
+		return "BaseResponse [success=" + success + ", list=" + list + ", errorMessage=" + errorMessage + "]";
 	}
 	
 	

@@ -18,8 +18,8 @@ public class BaseController<T extends BaseBusiness, B extends BaseRepository> {
 	public BaseController() throws CustomErrorException {
 		try {
 			configureMVC(
-				(Class)(((ParameterizedType) Objects.requireNonNull(this.getClass().getGenericSuperclass())).getActualTypeArguments()[0]),
-			    (Class)(((ParameterizedType) Objects.requireNonNull(this.getClass().getGenericSuperclass())).getActualTypeArguments()[1])
+				(Class)(((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0]),
+			    (Class)(((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1])
 			);
 		} catch (InstantiationException e) {
 			throw new CustomErrorException("Ha ocurrido un error instancionado las clases: "+ e.getMessage());
