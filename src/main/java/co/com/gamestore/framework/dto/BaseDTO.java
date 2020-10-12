@@ -1,4 +1,4 @@
-package co.com.gamestore.framework.response;
+package co.com.gamestore.framework.dto;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
  * @param <T>
  */
 
-public class BaseResponse implements Serializable {
+public class BaseDTO implements Serializable {
 	
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class BaseResponse implements Serializable {
 	private List<?> list;
 	private String errorMessage;
 	
-	public BaseResponse() {
+	public BaseDTO() {
 		super();
 	}
 

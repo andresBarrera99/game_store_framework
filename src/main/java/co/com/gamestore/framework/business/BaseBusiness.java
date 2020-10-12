@@ -1,7 +1,7 @@
 package co.com.gamestore.framework.business;
 
+import co.com.gamestore.framework.dto.BaseDTO;
 import co.com.gamestore.framework.repository.BaseRepository;
-import co.com.gamestore.framework.response.BaseResponse;
 
 /**
  * @author Jonathan.Barrera
@@ -11,7 +11,7 @@ public class BaseBusiness < B extends BaseRepository> {
 	private B repository;
 	
 	@SuppressWarnings("deprecation")
-	protected <T extends BaseResponse> T handleError(Exception e, Class<T> responseClass) throws ReflectiveOperationException {
+	protected <T extends BaseDTO> T handleError(Exception e, Class<T> responseClass) throws ReflectiveOperationException {
 		T obj = null;
 		try {
 			obj = responseClass.newInstance();
